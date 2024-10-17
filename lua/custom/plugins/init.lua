@@ -8,14 +8,19 @@ return {
     lazy = false,
     opts = {},
     -- Optional dependencies
-    -- dependencies = { { 'echasnovski/mini.icons', opts = {} } },
-    dependencies = { 'nvim-tree/nvim-web-devicons' }, -- use if prefer nvim-web-devicons
+    dependencies = { { 'echasnovski/mini.icons', opts = {} } },
+    -- dependencies = { 'nvim-tree/nvim-web-devicons' }, -- use if prefer nvim-web-devicons
     keys = {
       { '-', '<cmd>Oil<cr>', desc = 'Open parent directory' },
     },
     config = function()
       require('oil').setup {
-        default_file_explorer = true,
+        columns = {
+          'permission',
+          'size',
+          'mtime',
+          'icon',
+        },
         delete_to_trash = true,
         skip_confirm_for_simple_edits = true,
         view_options = {
@@ -45,5 +50,9 @@ return {
   {
     'Exafunction/codeium.vim',
     event = 'BufEnter',
+  },
+  {
+    'nvim-tree/nvim-web-devicons',
+    lazy = false,
   },
 }
