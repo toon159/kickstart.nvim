@@ -14,7 +14,15 @@ return {
     { '\\', ':Neotree reveal<CR>', desc = 'NeoTree reveal', silent = true },
   },
   opts = {
+    window = {
+      position = 'right',
+    },
     filesystem = {
+      filtered_items = {
+        hide_dotfiles = false,
+        hide_by_name = { '.git', '.DS_Store' },
+        always_show = { '.env' },
+      },
       window = {
         mappings = {
           ['\\'] = 'close_window',
