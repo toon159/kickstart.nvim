@@ -851,6 +851,22 @@ require('lazy').setup({
 
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
+    keys = {
+      {
+        '<leader>e',
+        function()
+          require('mini.files').open(vim.api.nvim_buf_get_name(0), true)
+        end,
+        desc = 'Open mini.files (Directory of Current File)',
+      },
+      {
+        '<leader>E',
+        function()
+          require('mini.files').open(vim.uv.cwd(), true)
+        end,
+        desc = 'Open mini.files (cwd)',
+      },
+    },
     config = function()
       -- Better Around/Inside textobjects
       --
@@ -884,7 +900,14 @@ require('lazy').setup({
 
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
-      require('mini.files').setup()
+      local files = require 'mini.files'
+      files.setup {
+        windows = {
+          preview = true,
+          width_focus = 30,
+          width_preview = 50,
+        },
+      }
     end,
   },
   { -- Highlight, edit, and navigate code

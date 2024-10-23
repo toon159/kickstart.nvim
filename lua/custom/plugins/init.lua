@@ -42,8 +42,8 @@ return {
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     opts = {
       tabline = {
-        lualine_a = { 'buffers' },
-        lualine_z = { 'tabs' },
+        lualine_a = { { 'buffers', show_filename_only = false, mode = 2 } },
+        lualine_z = { { 'filename', path = 1 } },
       },
     },
   },
