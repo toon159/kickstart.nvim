@@ -908,6 +908,8 @@ require('lazy').setup({
           width_preview = 50,
         },
       }
+
+      -- require('mini.comment').setup()
     end,
   },
   { -- Highlight, edit, and navigate code
