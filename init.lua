@@ -912,6 +912,9 @@ require('lazy').setup({
       -- require('mini.comment').setup()
     end,
   },
+  {
+    'RRethy/nvim-treesitter-endwise',
+  },
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
@@ -938,7 +941,11 @@ require('lazy').setup({
           node_decremental = 'grm',
         },
       },
+      endwise = {
+        enable = true,
+      },
     },
+
     -- There are additional nvim-treesitter modules that you can use to interact
     -- with nvim-treesitter. You should go explore a few and see what interests you:
     --
