@@ -73,4 +73,9 @@ return {
     event = 'VeryLazy',
     enabled = vim.fn.has 'nvim-0.10.0' == 1,
   },
+  {
+    'ThePrimeagen/harpoon',
+    branch = 'harpoon2',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+  },
 }
