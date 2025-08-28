@@ -659,7 +659,7 @@ require('lazy').setup({
       --  By default, Neovim doesn't support everything that is in the LSP specification.
       --  When you add blink.cmp, luasnip, etc. Neovim now has *more* capabilities.
       --  So, we create new capabilities with blink.cmp, and then broadcast that to the servers.
-      local capabilities = require('blink.cmp').get_lsp_capabilities()
+      -- local capabilities = require('blink.cmp').get_lsp_capabilities()
 
       -- Enable the following language servers
       --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
@@ -682,8 +682,43 @@ require('lazy').setup({
         --
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         -- ts_ls = {},
-        --
         elixirls = {},
+        tailwindcss = {
+          filetypes = { 'html', 'elixir', 'eelixir', 'heex' },
+          init_options = {
+            userLanguages = {
+              elixir = 'html-eex',
+              eelixir = 'html-eex',
+              heex = 'html-eex',
+            },
+          },
+          settings = {
+            tailwindCSS = {
+              experimental = {
+                classRegex = {
+                  'class[:]\\s*"([^"]*)"',
+                },
+              },
+            },
+          },
+        },
+        emmet_language_server = {
+          filetypes = { 'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss', 'less', 'elixir', 'eelixir', 'heex' },
+          init_options = {
+            userLanguages = {
+              elixir = 'html-eex',
+              eelixir = 'html-eex',
+              heex = 'html-eex',
+            },
+            html = {
+              options = {
+                -- For possible options, see: https://github.com/emmetio/emmet/blob/master/src/config.ts#L79-L267
+                ['bem.enabled'] = true,
+              },
+            },
+          },
+        },
+        --
 
         lua_ls = {
           -- cmd = { ... },
@@ -718,22 +753,32 @@ require('lazy').setup({
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
       })
+
+      ---@type MasonLspconfigSettings
+      ---@diagnostic disable-next-line: missing-fields
+      require('mason-lspconfig').setup {
+        automatic_enable = vim.tbl_keys(servers or {}),
+      }
+
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
-      require('mason-lspconfig').setup {
-        ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
-        automatic_installation = false,
-        handlers = {
-          function(server_name)
-            local server = servers[server_name] or {}
-            -- This handles overriding only values explicitly passed
-            -- by the server configuration above. Useful when disabling
-            -- certain features of an LSP (for example, turning off formatting for ts_ls)
-            server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-            require('lspconfig')[server_name].setup(server)
-          end,
-        },
-      }
+      for server_name, config in pairs(servers) do
+        vim.lsp.config(server_name, config)
+      end
+      -- require('mason-lspconfig').setup {
+      -- ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
+      -- automatic_installation = false,
+      -- handlers = {
+      -- function(server_name)
+      -- local server = servers[server_name] or {}
+      -- -- This handles overriding only values explicitly passed
+      -- -- by the server configuration above. Useful when disabling
+      -- certain features of an LSP (for example, turning off formatting for ts_ls)
+      -- server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+      -- require('lspconfig')[server_name].setup(server)
+      -- end,
+      -- },
+      -- }
     end,
   },
 
@@ -954,7 +999,22 @@ require('lazy').setup({
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'elixir', 'eex' },
+      ensure_installed = {
+        'bash',
+        'c',
+        'diff',
+        'html',
+        'lua',
+        'luadoc',
+        'markdown',
+        'markdown_inline',
+        'query',
+        'vim',
+        'vimdoc',
+        'elixir',
+        'eex',
+        'heex',
+      },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
