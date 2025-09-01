@@ -26,14 +26,14 @@ return {
     end,
     keys = {
       {
-        '<leader>ha',
+        '<leader>a',
         function()
           require('harpoon'):list():add()
         end,
         desc = 'harpoon file',
       },
       {
-        '<leader>hh',
+        '<leader>o',
         function()
           local harpoon = require 'harpoon'
           harpoon.ui:toggle_quick_menu(harpoon:list())
@@ -120,7 +120,7 @@ return {
       quickfile = { enabled = true },
       scope = { enabled = true },
       scroll = { enabled = false },
-      statuscolumn = { enabled = true },
+      statuscolumn = { enabled = false },
       words = { enabled = true },
       styles = {
         notification = {
@@ -131,14 +131,14 @@ return {
     keys = {
       -- Top Pickers & Explorer
       {
-        '<leader><cr>',
+        '<leader>,',
         function()
           Snacks.picker.smart()
         end,
         desc = 'Smart Find Files',
       },
       {
-        '<leader>,',
+        '<leader><space>',
         function()
           Snacks.picker.buffers()
         end,
@@ -661,9 +661,9 @@ return {
             enableTestLenses = false,
           },
           on_attach = function(client, bufnr)
-            vim.keymap.set('n', '<space>fp', ':ElixirFromPipe<cr>', { buffer = true, noremap = true })
-            vim.keymap.set('n', '<space>tp', ':ElixirToPipe<cr>', { buffer = true, noremap = true })
-            vim.keymap.set('v', '<space>em', ':ElixirExpandMacro<cr>', { buffer = true, noremap = true })
+            vim.keymap.set('n', '<leader>fp', ':ElixirFromPipe<cr>', { buffer = true, noremap = true })
+            vim.keymap.set('n', '<leader>tp', ':ElixirToPipe<cr>', { buffer = true, noremap = true })
+            vim.keymap.set('v', '<leader>em', ':ElixirExpandMacro<cr>', { buffer = true, noremap = true })
           end,
         },
         projectionist = {
