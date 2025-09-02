@@ -84,7 +84,12 @@ return {
       options = { section_separators = '', component_separators = '' },
       tabline = {
         lualine_a = { 'buffers' },
-        -- lualine_z = { 'tabs' },
+        lualine_z = { 'tabs' },
+      },
+      sections = {
+        lualine_c = {
+          { 'filename', file_status = true, path = 1 },
+        },
       },
     },
   },
@@ -657,9 +662,12 @@ return {
         nextls = { enable = false },
         elixirls = {
           enable = true,
+          cmd = 'elixir-ls',
           settings = elixirls.settings {
             dialyzerEnabled = true,
+            fetchDeps = false,
             enableTestLenses = false,
+            suggestSpecs = true,
           },
           on_attach = function(client, bufnr)
             vim.keymap.set('n', '<leader>fp', ':ElixirFromPipe<cr>', { buffer = true, noremap = true })
