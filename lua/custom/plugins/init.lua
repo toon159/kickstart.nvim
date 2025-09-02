@@ -81,9 +81,10 @@ return {
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     opts = {
+      options = { section_separators = '', component_separators = '' },
       tabline = {
         lualine_a = { 'buffers' },
-        lualine_z = { 'tabs' },
+        -- lualine_z = { 'tabs' },
       },
     },
   },
