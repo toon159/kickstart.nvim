@@ -896,8 +896,8 @@ require('lazy').setup({
       completion = {
         -- By default, you may press `<c-space>` to show the documentation.
         -- Optionally, set `auto_show = true` to show the documentation after a delay.
-        documentation = { auto_show = true, auto_show_delay_ms = 500, window = { border = 'double' } },
-        -- menu = { border = 'single' },
+        documentation = { auto_show = true, auto_show_delay_ms = 500, window = { border = 'solid' } },
+        menu = { border = 'solid' },
       },
 
       sources = {
