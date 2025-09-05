@@ -144,7 +144,7 @@ return {
         enabled = true,
         timeout = 3000,
       },
-      picker = { enabled = true, matcher = { frecency = true }, debug = { scores = true } },
+      picker = { enabled = true, matcher = { frecency = false }, debug = { scores = false } },
       quickfile = { enabled = true },
       scope = { enabled = true },
       scroll = { enabled = false },
