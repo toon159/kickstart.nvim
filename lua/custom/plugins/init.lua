@@ -159,14 +159,14 @@ return {
     keys = {
       -- Top Pickers & Explorer
       {
-        '<leader>,',
+        '<leader><space>',
         function()
           Snacks.picker.smart()
         end,
         desc = 'Smart Find Files',
       },
       {
-        '<leader><space>',
+        '<leader>,',
         function()
           Snacks.picker.buffers()
         end,
